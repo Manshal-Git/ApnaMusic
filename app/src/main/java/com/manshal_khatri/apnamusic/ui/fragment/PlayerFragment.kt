@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
@@ -12,7 +11,7 @@ import androidx.media3.common.util.Util
 import androidx.media3.exoplayer.ExoPlayer
 import com.manshal_khatri.apnamusic.R
 import com.manshal_khatri.apnamusic.databinding.FragmentPlayerBinding
-import com.manshal_khatri.apnamusic.model.Song
+import com.manshal_khatri.apnamusic.util.Functions
 import com.manshal_khatri.apnamusic.viewmodel.SongViewModel
 
 class PlayerFragment : Fragment() {
@@ -23,7 +22,6 @@ class PlayerFragment : Fragment() {
     private var playWhenReady = true
     private var currentItem = 0
     private var playbackPosition = 0L
-    private var lastSong : Song? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,10 @@ class PlayerFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_player, container, false)
         binding = FragmentPlayerBinding.bind(view)
-        Toast.makeText(requireContext(), "$", Toast.LENGTH_SHORT).show()
+        mVM.currentSong.value?.let{
+            Functions.setImage(it.imgUrl!!,binding.tvThumbnail)
+            binding.tvName.text = it.name
+        }
         return binding.root
     }
     override fun onStart() {
@@ -79,9 +80,9 @@ class PlayerFragment : Fragment() {
                     .setUri(url)
                     .setMimeType(MimeTypes.AUDIO_MPEG)
                     .build()
+
                 exoPlayer.setMediaItem(mediaItem)
                 exoPlayer.playWhenReady = playWhenReady
-                exoPlayer.seekTo(currentItem, playbackPosition)
                 exoPlayer.prepare()
             }
     }
@@ -90,9 +91,7 @@ class PlayerFragment : Fragment() {
             playbackPosition = exoPlayer.currentPosition
             currentItem = exoPlayer.currentMediaItemIndex
             playWhenReady = exoPlayer.playWhenReady
-            lastSong = mVM.currentSong.value
             exoPlayer.release()
-
         }
         player = null
     }

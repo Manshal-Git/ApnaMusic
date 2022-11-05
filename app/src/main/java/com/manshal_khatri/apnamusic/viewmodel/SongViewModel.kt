@@ -20,7 +20,8 @@ class SongViewModel : ViewModel(){
             for (element in list){
                 val name = element.data?.get("name").toString()
                 val url = element.data?.get("url").toString()
-                _songsList.value?.add(Song(name,url))
+                val imgUrl = element.data?.get("imgUrl").toString()
+                _songsList.value?.add(Song(name,url,imgUrl))
             }
             _songsList.postValue(_songsList.value)
         }

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 object Functions {
 
     fun setImage(imgUrl : String,imageView : ImageView,){
-        Glide.with(imageView.context).load(imgUrl).into(imageView)
+        Glide.with(imageView.context).load(imgUrl).centerCrop().into(imageView)
     }
     fun makeViewVisible(v : View){
         v.visibility = VISIBLE

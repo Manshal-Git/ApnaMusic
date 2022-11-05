@@ -11,7 +11,7 @@
         <ImageView
             android:layout_width="4dp"
             android:layout_height="match_parent"
-            android:background="@color/blue_tint"/>
+            android:background="@color/blue_tint" />
 
         <TextView
             android:id="@+id/tvName"
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:textSize="18sp"
-            android:gravity="center" />
+            android:fontFamily="@font/satoshi_medium" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
