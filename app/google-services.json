@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "847929530987",
+    "project_id": "apna-gaana-2d259",
+    "storage_bucket": "apna-gaana-2d259.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847929530987:android:a1f9f4bb4978f6279d2f2e",
+        "android_client_info": {
+          "package_name": "com.manshal_khatri.apnamusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847929530987-1perbd9l80rlp9fl6irj2ea546v7fnmt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manshal_khatri.apnamusic",
+            "certificate_hash": "c03ba7554852a70275601b6d69225310902140fd"
+          }
+        },
+        {
+          "client_id": "847929530987-tm7e6u3mn5l4atcfdl37rj68pmfsl1e1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_TOog13uZJmGlwmhjkEazGbYfluYBGgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847929530987-tm7e6u3mn5l4atcfdl37rj68pmfsl1e1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
