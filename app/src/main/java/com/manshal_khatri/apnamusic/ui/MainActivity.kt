@@ -3,6 +3,7 @@ package com.manshal_khatri.apnamusic.ui
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE
 import androidx.lifecycle.ViewModelProvider
 import com.manshal_khatri.apnamusic.databinding.ActivityMainBinding
 import com.manshal_khatri.apnamusic.ui.fragment.PlayerFragment
@@ -28,13 +29,16 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    fun replaceFragment(screen: NavAction){
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(supportFragmentManager.backStackEntryCount==0) finish()
+    }
+    private fun replaceFragment(screen: NavAction){
         val fragment = if(screen==NavAction.SongsFragment) SongsFragment.newInstance(vm)
         else PlayerFragment.newInstance(vm)
         supportFragmentManager.beginTransaction().addToBackStack(null)
             .replace(binding.fragmentContainerView.id,
-                fragment).commit()
+                fragment).setTransition(TRANSIT_FRAGMENT_FADE).commit()
     }
 
 }
