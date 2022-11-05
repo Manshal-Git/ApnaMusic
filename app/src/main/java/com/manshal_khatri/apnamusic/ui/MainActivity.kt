@@ -1,7 +1,8 @@
-package com.manshal_khatri.apnamusic
+package com.manshal_khatri.apnamusic.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.manshal_khatri.apnamusic.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
