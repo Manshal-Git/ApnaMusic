@@ -70,4 +70,10 @@ dependencies {
     // LOTTIE  ----------------------------------------------------------------------------------------
     implementation "com.airbnb.android:lottie:5.2.0"
 
+    // EXO_PLAYER
+    def mediaVersion = "1.0.0-alpha03"
+    implementation "androidx.media3:media3-exoplayer:$mediaVersion"
+    implementation "androidx.media3:media3-ui:$mediaVersion"
+    implementation "androidx.media3:media3-exoplayer-dash:$mediaVersion"
+
 }
