@@ -12,6 +12,8 @@ class SongViewModel : ViewModel(){
 
     private val _songsList = MutableLiveData<MutableList<Song>>(mutableListOf())
     val songsList : LiveData<MutableList<Song>> get() = _songsList
+    private val _currentSong = MutableLiveData<Song>()
+    val currentSong : LiveData<Song> get() = _currentSong
 
     fun getAllSongs(){
         repository.fetchAllSongs { list->
@@ -22,6 +24,10 @@ class SongViewModel : ViewModel(){
             }
             _songsList.postValue(_songsList.value)
         }
+    }
+
+    fun makeCurrentSong(song : Song){
+        _currentSong.postValue(song)
     }
 
 }

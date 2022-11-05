@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.SongsFragment">
 
-    <TextView
-        android:id="@+id/tv"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSongs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

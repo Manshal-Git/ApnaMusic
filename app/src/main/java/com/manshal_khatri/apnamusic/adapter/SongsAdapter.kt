@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.manshal_khatri.apnamusic.databinding.ItemSongCardBinding
+import com.manshal_khatri.apnamusic.viewmodel.SongViewModel
 
-class SongsAdapter() : RecyclerView.Adapter<SongsAdapter.ViewHolder>()  {
-
-    inner class ViewHolder(binding : ItemSongCardBinding) : RecyclerView.ViewHolder(binding.root){
-
+class SongsAdapter(val vm : SongViewModel) : RecyclerView.Adapter<SongsAdapter.ViewHolder>()  {
+    val list = vm.songsList.value!!
+    inner class ViewHolder(val binding : ItemSongCardBinding) : RecyclerView.ViewHolder(binding.root){
+        val name = binding.tvName
+        val card = binding.songCard
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,11 +24,17 @@ class SongsAdapter() : RecyclerView.Adapter<SongsAdapter.ViewHolder>()  {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        val song = list[position]
+        with(song){
+            holder.name.text = name
+            holder.card.setOnClickListener {
+                vm.makeCurrentSong(song)
+            }
+        }
     }
 
     override fun getItemCount() : Int{
-        return 0
+        return list.size
     }
 
 }

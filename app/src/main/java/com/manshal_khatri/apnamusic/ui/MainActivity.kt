@@ -23,11 +23,15 @@ class MainActivity : AppCompatActivity() {
         vm = ViewModelProvider(this)[SongViewModel::class.java]
         replaceFragment(NavAction.SongsFragment)
 
+        vm.currentSong.observe(this){
+            replaceFragment(NavAction.PlayerFragment)
+        }
+
     }
 
     fun replaceFragment(screen: NavAction){
         val fragment = if(screen==NavAction.SongsFragment) SongsFragment.newInstance(vm)
-        else PlayerFragment()
+        else PlayerFragment.newInstance(vm)
         supportFragmentManager.beginTransaction().addToBackStack(null)
             .replace(binding.fragmentContainerView.id,
                 fragment).commit()
