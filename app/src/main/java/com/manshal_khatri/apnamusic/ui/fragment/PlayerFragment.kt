@@ -1,5 +1,6 @@
 package com.manshal_khatri.apnamusic.ui.fragment
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +23,11 @@ class PlayerFragment : Fragment() {
     private var playWhenReady = true
     private var currentItem = 0
     private var playbackPosition = 0L
+    private lateinit var res : Resources
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -34,12 +37,24 @@ class PlayerFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_player, container, false)
         binding = FragmentPlayerBinding.bind(view)
+        res = binding.root.context.resources
+
+
         mVM.currentSong.value?.let{
             Functions.setImage(it.imgUrl!!,binding.tvThumbnail)
             binding.tvName.text = it.name
         }
+
+        binding.mediaPlayer.controllerShowTimeoutMs = 360000
+        binding.mediaPlayer.setControllerVisibilityListener { visibility ->
+            val colorId = if (visibility == View.VISIBLE) R.color.blue_dark else R.color.blue_shade
+            binding.mediaPlayer.background = res.getDrawable(R.drawable.transparent_background)
+            binding.playerLayout.setBackgroundColor(res.getColor(colorId))
+        }
         return binding.root
     }
+
+
     override fun onStart() {
         super.onStart()
         if (Util.SDK_INT > 23) {

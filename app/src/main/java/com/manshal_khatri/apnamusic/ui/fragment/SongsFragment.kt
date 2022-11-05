@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.manshal_khatri.apnamusic.R
 import com.manshal_khatri.apnamusic.adapter.SongsAdapter
 import com.manshal_khatri.apnamusic.databinding.FragmentSongsBinding
+import com.manshal_khatri.apnamusic.util.Functions
 import com.manshal_khatri.apnamusic.viewmodel.SongViewModel
 
 class SongsFragment : Fragment() {
@@ -31,7 +32,10 @@ class SongsFragment : Fragment() {
             rvSongs.layoutManager = LinearLayoutManager(activity)
             with(mVM) {
                 songsList.observe(viewLifecycleOwner) {
-                    rvSongs.adapter = SongsAdapter(mVM)
+                    if(it.isNotEmpty()){
+                        rvSongs.adapter = SongsAdapter(mVM)
+                        Functions.makeViewGone(loadingScreen)
+                    }
                 }
             }
         }
