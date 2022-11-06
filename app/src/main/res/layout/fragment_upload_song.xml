@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Your Song is Uploaded Successfully"
             android:layout_marginHorizontal="64dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textAlignment="center"/>
 
     </LinearLayout>

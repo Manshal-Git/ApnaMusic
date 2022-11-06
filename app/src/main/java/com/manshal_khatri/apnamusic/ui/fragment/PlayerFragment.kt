@@ -41,7 +41,9 @@ class PlayerFragment : Fragment() {
 
 
         mVM.currentSong.value?.let{
-            Functions.setImage(it.imgUrl!!,binding.tvThumbnail)
+            if(it.imgUrl!="null"){
+                Functions.setImage(it.imgUrl!!,binding.tvThumbnail)
+            }
             binding.tvName.text = it.name
         }
 
@@ -53,7 +55,6 @@ class PlayerFragment : Fragment() {
         }
         return binding.root
     }
-
 
     override fun onStart() {
         super.onStart()

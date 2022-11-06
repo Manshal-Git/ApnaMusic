@@ -48,16 +48,21 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         if(supportFragmentManager.backStackEntryCount==0) finish()
+        makeUploadButtonVisible()
     }
-    private fun replaceFragment(screen: NavAction){
+    fun replaceFragment(screen: NavAction){
         val fragment = if(screen==NavAction.SongsFragment) SongsFragment.newInstance(vm)
         else if(screen==NavAction.PlayerFragment) PlayerFragment.newInstance(vm)
-        else UploadSongFragment.newInstance(vm)
-        if(screen==NavAction.SongsFragment) Functions.makeViewVisible(binding.btnAddNew)
-        else Functions.makeViewGone(binding.btnAddNew)
+        else UploadSongFragment.newInstance(vm,this)
+        if(screen!=NavAction.SongsFragment) Functions.makeViewGone(binding.btnAddNew)
+        else makeUploadButtonVisible()
         supportFragmentManager.beginTransaction().addToBackStack(null)
             .replace(binding.fragmentContainerView.id,
                 fragment).setTransition(TRANSIT_FRAGMENT_FADE).commit()
+    }
+
+    fun makeUploadButtonVisible(){
+        if(supportFragmentManager.backStackEntryCount<=1) Functions.makeViewVisible(binding.btnAddNew)
     }
 
     private fun selectSongFromStorage(){
@@ -81,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                     }catch(e : Exception){
                         e.printStackTrace()
                     }
+
                 }
             }
         }else{
@@ -95,6 +101,10 @@ class MainActivity : AppCompatActivity() {
         val etName = EditText(this)
         dialog.setView(etName)
         dialog.setPositiveButton("Upload",){ p0, p1 ->
+            if(etName.text.isEmpty()){
+                Toast.makeText(this, "Can't upload with empty Name !", Toast.LENGTH_SHORT).show()
+                return@setPositiveButton
+            }
             vm.songToUpload.value?.name = etName.text.toString()
             selectSongFromStorage()
             replaceFragment(NavAction.UploadSongFragment)

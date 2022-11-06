@@ -21,6 +21,7 @@ class SongViewModel : ViewModel(){
     val serverResponse : LiveData<Boolean> get() = _serverResponse
 
     fun getAllSongs(){
+        _songsList.value?.clear()
         repository.fetchAllSongs { list->
             for (element in list){
                 val name = element.data?.get("name").toString()

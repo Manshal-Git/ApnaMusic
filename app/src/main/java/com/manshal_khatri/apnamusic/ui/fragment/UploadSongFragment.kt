@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.manshal_khatri.apnamusic.R
 import com.manshal_khatri.apnamusic.databinding.FragmentUploadSongBinding
+import com.manshal_khatri.apnamusic.ui.MainActivity
 import com.manshal_khatri.apnamusic.util.Functions
+import com.manshal_khatri.apnamusic.util.NavAction
 import com.manshal_khatri.apnamusic.viewmodel.SongViewModel
 import kotlinx.coroutines.*
 
@@ -17,6 +19,7 @@ class UploadSongFragment : Fragment() {
 
     private lateinit var binding: FragmentUploadSongBinding
     lateinit var mVM: SongViewModel
+    lateinit var mActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +29,11 @@ class UploadSongFragment : Fragment() {
         binding = FragmentUploadSongBinding.bind(view)
 
         with(binding) {
-            btnToHome.setOnClickListener { activity?.finish() }
+            btnToHome.setOnClickListener {
+                activity?.onBackPressed()
+                mActivity.supportFragmentManager.popBackStack()
+                mActivity.replaceFragment(NavAction.SongsFragment)
+            }
 
             mVM.serverResponse.observe(viewLifecycleOwner) {
                 if (it) {
@@ -52,10 +59,11 @@ class UploadSongFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(vm : SongViewModel) =
+        fun newInstance(vm : SongViewModel,activity: MainActivity) =
             UploadSongFragment().apply {
                 arguments = Bundle().apply {
                     mVM = vm
+                    mActivity = activity
                 }
             }
     }
