@@ -51,6 +51,7 @@
                android:layout_height="240dp"
                app:shutter_background_color="@color/blue_shade"
                app:use_controller="true"
+               app:use_artwork="false"
                />
 
        </LinearLayout>

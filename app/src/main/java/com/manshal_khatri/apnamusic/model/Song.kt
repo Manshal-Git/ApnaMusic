@@ -1,7 +1,7 @@
 package com.manshal_khatri.apnamusic.model
 
 data class Song(
-    val name : String,
-    val url : String,
-    val imgUrl : String? = null
+    var name : String="",
+    var url : String="",
+    var imgUrl : String? = null
 )
